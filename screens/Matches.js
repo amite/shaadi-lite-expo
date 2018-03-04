@@ -22,8 +22,9 @@ export default class Matches extends React.Component {
     return (
       <View style={styles.container}>
         <WebView
-          source={{ uri: "https://my.shaadi.com/search" }}
-          style={{ marginTop: 40 }}
+          source={{
+            uri: "https://www.shaadi.com/search/partner"
+          }}
         />
       </View>
     )
@@ -33,6 +34,7 @@ export default class Matches extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    marginTop: Platform.OS === "ios" ? 40 : 0
   }
 })
