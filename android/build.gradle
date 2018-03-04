@@ -1,0 +1,49 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+  repositories {
+    jcenter()
+    google()
+  }
+  dependencies {
+    classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-SNAPSHOT'
+
+  }
+}
+
+allprojects {
+  repositories {
+    maven {
+      url "$rootDir/maven"
+    }
+    maven {
+      // We use a modified build of com.android.support.test:runner:1.0.1. Explanation in maven-test/README
+      url "$rootDir/maven-test"
+    }
+    jcenter()
+    maven {
+      // Local Maven repo containing AARs with JSC built for Android
+      url "$rootDir/../js/node_modules/jsc-android/android"
+    }
+    flatDir {
+      dirs 'libs'
+      // dirs project(':expoview').file('libs')
+    }
+    maven { url "https://jitpack.io" }
+    maven {
+      url 'https://maven.google.com'
+    }
+
+    // Want this last so that we never end up with a stale cache
+    mavenLocal()
+  }
+}
+
+dependencies {
+  compile 'com.jakewharton:butterknife:9.0.0-SNAPSHOT'
+  kapt 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
+}
